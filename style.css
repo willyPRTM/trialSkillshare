@@ -1,0 +1,319 @@
+:root {
+  /* GLOBAL CHANGES */
+  --text-font: Arial; /* Other available font options: Courier New, Monospace, Cursive, Fantasy */
+  --map-elements-indent: 30px;
+
+  /* HOW MAP HEADER LOOKS LIKE */
+  --header-height: 60px;
+  --header-background-color: #66cc00;
+  
+  /* HOW MAP TITLE LOOKS LIKE */
+  --title-size: 24px;
+  --title-color: #F3F2F2;
+  --title-indent-left: 30px;
+
+  /* HOW "LEARN MORE" BUTTON LOOKS LIKE */
+  --learnmore-text-size: 16px;
+  --learnmore-text-color: #E2E2E2;
+  --learnmore-background-color: #66cc00;
+  --learnmore-background-color-hover: #53a500;
+  --learnmore-indent-right: 30px;
+  
+  /* HOW MARKERS LOOK LIKE */
+  --marker-size: 40px;
+  --marker-color: white;
+  --marker-image: url('Tanpa Judul.png');
+  --marker-image-size: 30px;
+  --marker-border-width: 2px;
+  --marker-border-color: black;*/
+
+  /* HOW BUTTONS ON THE MAP LOOK LIKE (+/-) */
+  --map-button-size: 50px;
+  
+
+  /* HOW MAP LEGEND LOOKS LIKE */
+  --map-legend-width: 200px;
+  --map-legend-text-size: 14px;
+  --map-legend-text-color: black;
+  --map-legend-background-color: white;
+
+  /* HOW LEGEND TOGGLE LOOKS LIKE*/
+  --map-toggle-width: 50px;
+  --map-toggle-height: 24px;
+  --map-toggle-radius: 15px;
+  --map-toggle-bg-color: #969696;
+  --map-toggle-bg-color-on: #66cc00;
+  --map-toggle-dot-width: 18px;
+  --map-toggle-dot-height: 18px;
+  --map-toggle-dot-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* THE REST OF THE CODE */
+/* PAGE STRUCTURE */
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+* {
+  font-family: var(--text-font);
+}
+#map {
+  width: 100%;
+  top: var(--header-height);
+  bottom: 0;
+  position: absolute;
+}
+
+/* MAP HEADER */
+#header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--header-background-color);
+  z-index: 1000;
+}
+
+/* MAP TITLE */
+#title {
+  margin-left: var(--title-indent-left);
+  font-size: var(--title-size);
+  color: var(--title-color);
+  font-style: normal;
+  font-weight: 700;
+  z-index: 1000;
+}
+
+/* LEARN MORE BUTTON */
+#learn-more {
+  display: none;
+  cursor: pointer;
+  padding: 12px 38px;
+  border-radius: 15px;
+  color: var(--learnmore-text-color);
+  background-color: var(--learnmore-background-color);
+  margin-right: var(--learnmore-indent-right);
+  font-size: var(--learnmore-text-size);
+}
+#learn-more:hover {
+  background-color: var(--learnmore-background-color-hover);
+}
+
+/* MAP MARKERS */
+.map-icon {
+  width: var(--marker-size);
+  height: var(--marker-size);
+}
+.map-icon div {
+  width: var(--marker-size);
+  height: var(--marker-size);
+  background-image: var(--marker-image);
+  background-size: var(--marker-image-size);
+  background-color: var(--marker-color);
+  border: var(--marker-border-width) solid var(--marker-border-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  box-shadow: 1px 1px 6px #80808047;
+}
+
+
+/* MAP LOGO */
+#gplogo {
+  background-color: #F3F2F2;
+  background-image: url(Greenpeace_Logo_Green_RGB.png);
+  background-size: 8rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 150px;
+  height: 35px;
+  position: absolute;
+  z-index: 700;
+  
+  top: auto;
+  left: auto;
+  bottom: 20px;
+  right: 20px;
+}
+
+
+/* LEAFLET COMPONENT STYLE CHANGES */
+.leaflet-control-layers-expanded {
+  background-color: var(--map-legend-background-color);
+  color: var(--map-legend-text-color);
+  width: var(--map-legend-width);
+  padding: 1.5rem 1.5rem;
+  border-radius: 10px;
+}
+.layer-control-open {
+  display: none;
+  cursor: pointer;
+  width: var(--map-button-size);
+  height: var(--map-button-size);
+  line-height: var(--map-button-size);
+  border-radius: 6px;
+  background-color: white;
+  margin: 10px !important;
+  padding: 0;
+  background-image: url(icons/layers.svg);
+  background-size: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 0;
+  z-index: 790;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+
+.layer-control-open:hover {
+  background-color: #f4f4f4;
+}
+
+.layer-control-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url(icons/close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  border: 0;
+  background-color: transparent;
+  opacity: 0.5;
+}
+
+.layer-control-close:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+.leaflet-control-layers {
+  background-color: var(--map-legend-background-color);
+  color: var(--map-legend-text-color);
+}
+
+.leaflet-control-layers-list {
+  padding-top: 1rem;
+  font-size: var(--map-legend-text-size);
+}
+
+.leaflet-control-layers label > span {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 30px;
+}
+
+.leaflet-control-layers-base > label > span > span {
+  display: block;
+}
+
+/* common styles */
+input[type="radio"], input[type="checkbox"] {
+  appearance: none;
+  background-color: var(--map-toggle-bg-color);
+  margin: 0;
+  min-width: var(--map-toggle-width);
+  width: var(--map-toggle-width);
+  height: var(--map-toggle-height);
+  border-radius: var(--map-toggle-radius);
+  display: grid;
+  place-content: center;
+  transition: background-color 200ms ease-in-out;
+}
+
+input[type="radio"]::before, input[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: 3px;
+	margin-left: 3px;
+	width: var(--map-toggle-dot-width);
+	height: var(--map-toggle-dot-height);
+	border-radius: 50%;
+	transition: margin 200ms ease-in-out;
+	box-shadow: inset 1em 1em var(--map-toggle-dot-color);
+}
+
+input[type="radio"]:checked, input[type="checkbox"]:checked {
+	background-color: var(--map-toggle-bg-color-on);
+}
+
+input[type="radio"]:checked::before, input[type="checkbox"]:checked::before {
+	position: absolute;
+	margin-left: 29px;
+}
+
+.leaflet-control-layers-separator {
+  border-top: 1px solid #ddd;
+  margin: 10px 0px;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+  border: none !important;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important;
+}
+
+.leaflet-touch .leaflet-bar a {
+  height: var(--map-button-size);
+  width: var(--map-button-size);
+  line-height: var(--map-button-size);
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.leaflet-touch .leaflet-bar a:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.leaflet-top {
+  top: var(--map-elements-indent);
+}
+.leaflet-right {
+  right: var(--map-elements-indent);
+}
+.leaflet-bottom {
+  bottom: var(--map-elements-indent);
+}
+.leaflet-left {
+  left: var(--map-elements-indent);
+}
+
+/* hide leaflet attribution */
+.leaflet-control-attribution {
+  display: none;
+}
+
+/* modal changes */
+.tingle-modal {
+  cursor: auto;
+}
+#modal {
+  display: none;
+}
